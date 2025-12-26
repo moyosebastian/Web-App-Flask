@@ -1,0 +1,40 @@
+<html>
+<head>
+<link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<title>Dashboard</title>
+</head>
+<body>
+<div class="container">
+<h2>Dashboard</h2>
+
+
+<h1>Dashboard Status</h1>
+
+
+<h3>Average Price: <span id="avgPrice"></span></h3>
+<h3>Total Cars: <span id="carCount"></span></h3>
+
+
+<div id="tableArea"></div>
+
+
+<a href="/welcome">Back</a>
+</div>
+
+
+<script>
+
+    $(document).ready(function() {
+        $.ajax({
+                type: 'GET',
+                url: 'http://127.0.0.1:5000/get_stats',
+                success: function(data) {
+                    $('#avgPrice').text(data.avg_price);
+                    $('#carCount').text(data.cars_count);
+                }
+            });
+    });
+</script>
+</body>
+</html>

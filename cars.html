@@ -1,0 +1,51 @@
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+<title>Cars</title>
+</head>
+<body>
+<div class="container">
+<h2>Cars List</h2>
+
+
+<form action="/add_car" method="POST" class="form-box">
+<input type="text" name="brand" placeholder="Brand" required>
+<input type="text" name="model" placeholder="Model" required>
+<input type="number" name="year" placeholder="Year" required>
+<input type="text" name="damage" placeholder="Damage" required>
+<input type="number" name="price" placeholder="Price" required>
+<button>Add Car</button>
+</form>
+
+
+<table>
+<tr>
+<th>Brand</th>
+<th>Model</th>
+<th>Year</th>
+<th>Damage</th>
+<th>Price</th>
+<th>Action</th>
+</tr>
+{% for car in cars %}
+<tr>
+<form action="/update_car/{{ car.id }}" method="POST">
+<td><input name="brand" value="{{ car.brand }}"></td>
+<td><input name="model" value="{{ car.model }}"></td>
+<td><input name="year" value="{{ car.year }}"></td>
+<td><input name="damage" value="{{ car.damage }}"></td>
+<td><input name="price" value="{{ car.price }}"></td>
+<td>
+<button>Save</button>
+<a href="/delete_car/{{ car.id }}" class="delete-btn">X</a>
+</td>
+</form>
+</tr>
+{% endfor %}
+</table>
+
+
+<a href="/welcome">Back</a>
+</div>
+</body>
+</html>
